@@ -159,10 +159,10 @@ return [
         //Dingo Laravel service Provider
         Dingo\Api\Provider\LaravelServiceProvider::class,
 
-        // Zizaco entrust Provider
+        //Zizaco entrust Provider
         Zizaco\Entrust\EntrustServiceProvider::class,
 
-        // JWT auth provider
+        //JWT auth provider
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
 
     ],

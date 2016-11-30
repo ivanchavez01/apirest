@@ -22,9 +22,13 @@ $api->version('v1', ['middleware' => 'api.auth'], function($api) {
     $api->get('role/permission', '\App\Http\Controllers\AuthController@getPermission');
 
     $api->post('role/permission/add', '\App\Http\Controllers\AuthController@attachPermission');
+});
+
+$api->version('v1', function($api){
     $api->post('auth', 'App\Http\Controllers\Auth\AuthController@authenticate');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+Route::get('/', 'productsController@index');
