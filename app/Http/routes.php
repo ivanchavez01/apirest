@@ -14,17 +14,22 @@
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['middleware' => 'api.auth'], function($api) {
+
     $api->resource('user', '\App\Http\Controllers\userController');
-
-
     $api->get('users/{userId}/roles/{role}', '\App\Http\Controllers\AuthController@attachRole');
     $api->get('user/{userId}/role', '\App\Http\Controllers\AuthController@getRole');
     $api->get('role/permission', '\App\Http\Controllers\AuthController@getPermission');
 
     $api->post('role/permission/add', '\App\Http\Controllers\AuthController@attachPermission');
-    $api->post('auth', 'App\Http\Controllers\Auth\AuthController@authenticate');
 });
 
-Route::get('/', function () {
-    return view('welcome');
+$api->version('v1', function($api){
+     $api->post('auth', 'App\Http\Controllers\Auth\AuthController@authenticate');
 });
+
+Route::get('/', 'productController@index');
+
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
