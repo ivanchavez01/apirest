@@ -1,45 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Brand;
-use App\Jobs\processProduct;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Product;
+use App\Http\Controllers\Controller;
 
-class productsController extends Controller
+class productsCtrl extends Controller
 {
-    public $size = 10;
-    public $offset = 0;
-
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index()
     {
-        $this->size = ($req->input('size') != "") ? $req->input('size') : $this->size;
-        $this->offset = ($req->input('offset') != "") ? $req->input('offset') : $this->offset;
-
-        $resProduct = Product::WithGroups();
-        $filters = $req->input("filters");
-
-        if(!empty($filters)) 
-            $resProduct->where($filters);
-        
-        return [
-            'total'     => $resProduct->count(),
-            'perpage'   => $this->size,
-            'items'     => $resProduct
-            ->offset($this->offset)
-            ->take($this->size)
-            ->get()
-        ]; 
-       
+        return view("admin.products.list");
     }
 
     /**

@@ -22,4 +22,8 @@ class Product extends Model
         "currencyRate",
         "promotionDateEnd"
     ];
+
+    public function scopeWithGroups($query) {
+       return $query->join('groups_suppliers', 'products.group_id', '=', 'groups_suppliers.id');
+    }
 }
