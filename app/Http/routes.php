@@ -24,12 +24,18 @@ $api->version('v1', ['middleware' => 'api.auth'], function($api) {
 });
 
 $api->version('v1', function($api){
-     $api->post('auth', 'App\Http\Controllers\Auth\AuthController@authenticate');
+    $api->post('auth', 'App\Http\Controllers\Auth\AuthController@authenticate');
+    $api->get("products", "App\Http\Controllers\productsController@index");
+    $api->get("groups", "App\Http\Controllers\GroupController@index");
 });
 
-Route::get('/', 'productController@index');
 
+Route::group(["prefix" => "admin"], function(){
+    Route::resource("products", "admin\productsCtrl");
+});
 
-Route::auth();
+Route::get('/', 'productsController@index');
+
+//Route::auth();
 
 Route::get('/home', 'HomeController@index');
