@@ -139,7 +139,7 @@
                         $scope.products = res.data.items;
                         $scope.total    = res.data.total;
 
-                        for(var i = $scope.page; i <= 5; i++) 
+                        for(var i = $scope.page; i <= (parseInt($scope.page) + 5); i++) 
                             $scope.pages.push(i);
                     }
                 });

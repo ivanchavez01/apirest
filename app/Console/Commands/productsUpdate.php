@@ -13,7 +13,7 @@ class productsUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'product:queue {supplier}';
+    protected $signature = 'product:queue {supplier} {brand}';
 
     /**
      * The console command description.
@@ -42,14 +42,17 @@ class productsUpdate extends Command
         $products = Suppliers::products()
             ->supplier("cva")
             ->params([
-                "marca"     => "%",
-                "grupo"     => "%",
-                "codigo"    => "%",
-                "clave"     => "%"
+                "marca"     => ($this->argument('brand') != "") ? $this->argument('brand') : "%",
+                //"grupo"     => "%",
+                //"codigo"    => "%",
+                //"clave"     => "%"
             ])
             ->get();
 
         $this->argument('supplier');
+
+        if($this->argument("brand") != "")
+            $this->info("Buscando la marca: " . $this->argument("brand"));
 
         foreach ($products->productsCollection as $product) {
             dispatch(new processProduct((array)$product));
