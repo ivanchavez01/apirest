@@ -34,7 +34,7 @@ Route::group(["prefix" => "admin"], function(){
     Route::resource("products", "admin\productsCtrl");
 });
 
-Route::get('/', '	@index');
+Route::get('/', 'productController@index');
 
 //Route::auth();
 

@@ -52,6 +52,7 @@ class ProductsStruct extends Migration
             $table->string('currencyRate', 20);
             $table->string('promotionDateEnd', 20);
             $table->boolean('is_active')->default(0);
+            $table->integer("quantity_total");
             $table->date('created_at');
             $table->date('updated_at');
 

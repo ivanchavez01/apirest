@@ -66,8 +66,22 @@ class processProduct extends Job implements ShouldQueue
                 "discount"              => $this->product["offerPrice"],
                 "currencyRate"          => $this->product["currencyRate"],
                 "promotionDescription"  => $this->product["promotionDescription"],
-                "promotionDateEnd"      => $this->product["promotionDateEnd"]
+                "promotionDateEnd"      => $this->product["promotionDateEnd"],
+                "quantity_total"        => $this->product["quantity_total"]
             ]);
+        }
+        else {
+            $product = Product::where(["model" => $this->product["key"]])
+                ->update([
+                    "price"                 => $this->product["price"],
+                    "quantity"              => $this->product["qty"],
+                    "warranty"              => $this->product["warranty"],
+                    "discount"              => $this->product["offerPrice"],
+                    "currencyRate"          => $this->product["currencyRate"],
+                    "promotionDescription"  => $this->product["promotionDescription"],
+                    "promotionDateEnd"      => $this->product["promotionDateEnd"],
+                    "quantity_total"        => $this->product["quantity_total"]
+                ]);
         }
 
         $total_products_per_sku = 0;
@@ -93,7 +107,8 @@ class processProduct extends Job implements ShouldQueue
             "supplier_id"   => $this->product["supplier_id"],
             "sku"           => $this->product["code"],
             "price"         => $this->product["price"],
-            "quantity"      => $total_products_per_sku
+            "quantity"      => $this->product["quantity_total"],
+            
         ]);
 
 

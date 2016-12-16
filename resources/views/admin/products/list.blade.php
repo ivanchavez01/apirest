@@ -20,9 +20,9 @@
 <ng-view></ng-view>
 
 <script type="text/ng-template" id="/products-listing.html">
-     <div class="container">
+     <div class="row-fluid">
 
-        <div class="filters col-lg-4">
+        <div class="filters col-lg-2">
             <form action="#">
                 <div class="form-group">
                     <label for="group">Grupo:</label>
@@ -41,45 +41,49 @@
                 </div>
             </form>
         </div>
+        <div class="col-lg-10">
+            <table class="table">
+                <tr>        
+                    <td>Modelo</td>
+                    <td style="width:50%">Producto</td>
+                    <td>Precio</td>
+                    <td>Stock HMO</td>
+                    <td>Stock</td>
+                    <td>Grupo</td>
+                </tr>
+                <tr ng-repeat="product in products">
+                    <td>@{{product.model}}</td>
+                    <td>@{{product.name}}</td>
+                    <td>@{{product.price}}</td>
+                    <td>@{{product.quantity}}</td>
+                    <td>@{{product.quantity_total}}</td>
+                    <td>@{{product.group_name}}</td>
+                </tr>
+            </table>
 
-
-        <table class="table">
-            <tr>        
-                <td>Modelo</td>
-                <td style="width:50%">Producto</td>
-                <td>Precio</td>
-                <td>Stock HMO</td>
-                <td>Grupo</td>
-            </tr>
-            <tr ng-repeat="product in products">
-                <td>@{{product.model}}</td>
-                <td>@{{product.name}}</td>
-                <td>@{{product.price}}</td>
-                <td>@{{product.quantity}}</td>
-                <td>@{{product.group_name}}</td>
-            </tr>
-        </table>
-
-        <div class="container">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li ng-repeat="page in pages">
-                        <a href="{{url("admin/products")}}/#!/page/@{{page}}">@{{page}}</a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="container">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li ng-repeat="page in pages">
+                            <a href="{{url("admin/products")}}/#!/page/@{{page}}">@{{page}}</a>
+                        </li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
+        </div>
+
+        
 </script>
 
 <script>
